@@ -37,7 +37,7 @@
                      </p>
                     <div class="panel panel-default">
                         <div class="panel-body row">
-                            <div class="col-md-3 col-xs-12" style="margin-top: 10px">
+                            <div class="col-md-6 col-xs-12" style="margin-top: 10px">
                                 <i class="fa fa-2x fa-phone"></i>
                                 <?php $telefonos = explode(",", $empresa->telefonos) ?>    
                                 @if(count($telefonos) == 1)
@@ -47,18 +47,29 @@
                                             {{ $telefonos[0] }}
                                         @endif
                                 @else
-                                    <a class="" data-toggle="popover" data-placement="top" data-content="@foreach ($telefonos as $tel) {{ $tel }}<br> @endforeach">
+                                    <a class="" data-toggle="popover" data-placement="right" title="<i class='fa fa-plus'></i> Otros telf.">
                                         {{ $telefonos[0] }} <i class="fa fa-caret-down"></i>
+                                        <ul id="telfPlus" class="hidden">
+                                           @foreach ($telefonos as $tel) <li>{{ $tel }}</li> @endforeach 
+                                        </ul>
                                     </a>
                                 @endif    
                             </div>
                             <div class="col-md-3  col-xs-12 " style="margin-top: 10px">
                                 <a href="mailto:{{ $empresa->email }}"><i class="fa fa-2x fa-envelope-o"></i> Contactar</a>
                             </div>
-                            <div class="col-md-3  col-xs-12 " style="margin-top: 10px">
-                                <a target="_blank" href="{{ $empresa->web }}"><i class="fa fa-2x fa-globe "></i> Website </a>
+                            <div class="col-md-6  col-xs-12 " style="margin-top: 10px">
+                                @if(isset($empresa->web))
+                                    <a target="_blank" href="http://{{ $empresa->web }}">
+                                        <i class="fa fa-2x fa-globe "></i> {{ $empresa->web }}
+                                    </a>
+                                @else
+                                    <b>
+                                        <i class="fa fa-2x fa-globe "></i> Sin Website
+                                    </b>
+                                @endif
                             </div>
-                            <div class="col-md-3  col-xs-12 " style="margin-top: 10px">
+                            <div class="col-md-6  col-xs-12 " style="margin-top: 10px">
                                 <a><i class="fa fa-2x fa-plus"></i> Info</a>
                             </div>
                         </div>
@@ -115,8 +126,12 @@
                                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOBAJodR1EfwjOhSCUwdyshas1nvuAwuI&callback=initMap">
                         </script>
                     </div>
-                    <div class="panel-footer map-box">
+                    <div class="panel-footer map-box" style="vertical-align:middle">
+                    @if(count($direcciones)<=0)
+                        <h5 style="color:white;margin:0px"><i class="fa fa-map-marker"></i> {{ $empresa->direccion }}</h5>
+                    @else
                        <h4><a href="#" data-toggle="modal" data-target="#direc"><i class="fa fa-dot-circle-o"></i> Ver todas las sucursales</a></h4>
+                    @endif
                     </div>
                 </div>
                 <div class="col-md-12" style="font-size: 14px;">

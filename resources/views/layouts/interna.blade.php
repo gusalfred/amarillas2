@@ -76,7 +76,15 @@
 
 <script>
     $(document).ready(function() {
-
+    
+     $('[data-toggle="popover"]').popover({
+      html:true,
+      content: $('#telfPlus').html()
+     });
+     $('[data-toggle="tooltip"]').tooltip({
+      html: true,
+      content: 'limpiar puntuación'
+     });
         $('.slider').slick({
             infinite: true,
             dots:true,

@@ -50,6 +50,7 @@ $(document).ready(function(){
 
 
 $(window).scroll(function() {
+   $('[data-toggle="popover"]').popover('hide');
     if ($(document).scrollTop() > 240) {
         $('.home').css('top','0px');
     }

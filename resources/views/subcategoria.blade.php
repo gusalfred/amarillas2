@@ -15,8 +15,6 @@
                 <li><a href="{{ url('/')  }}"><i class="fa fa-home"></i> amarillas365.com</a></li>
                 <li><a href="{{ url('/categoria/'.$cat1->slug)  }}">{{ substr($cat1->categoria, 0, 30) }} ...</a></li>
                 <li class="active">{{ substr($cat2->categoria, 0, 30) }}...</li>
-                <li>Lima</li>
-                <li class="active">Miraflores</li>
             </ol>
     <!--categorias-->
         <div class="col-md-8">

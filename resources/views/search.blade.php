@@ -1,16 +1,24 @@
 @extends('layouts.interna')
-
+@section('title') Resultados de búsqueda @endsection
 @section('content')
 
         <div class="container" style="margin-top: 50px;">
 
-            <div class="row" style="margin-top: 10px;">
+            <div class="row" style="margin-top: 20px;">
+            <ol class="breadcrumb">
+                <li><a href="{{ url('/')  }}"><i class="fa fa-home"></i> amarillas365.com</a></li>
+                <li>Búsqueda: '{{$termino}}'</li>
+            </ol>
                 <div class="col-md-8 col-sm-12">
-                    <h3><i class="fa fa-search"></i> Resultados de la búsqueda</h3>
+                @if(count($categorias) <= 0 && count($empresas) <= 0 && count($descripcion)<= 0)
+                    <p class="variable-title"><i class="fa fa-search"></i> Sin resultados para "<span class="bg-info" style="border-radius: 8px">{{$termino}}</span>" </p>
+                @else
+                    <p class="variable-title"><i class="fa fa-search"></i> Resultados de la búsqueda para "<span class="bg-success" style="border-radius: 8px"> {{$termino}} </span>" </p>
+                @endif                    
                     <div class="panel panel-search panel-default">
-                        <div class="panel-heading"><h5>Por Categorias</h5></div>
+                        <div class="panel-heading"><h5>Por Categorías</h5></div>
                         <div class="panel-body list-group">
-                             @foreach ($categorias as $row)
+                            @foreach ($categorias as $row)
                                     <a class="list-group-item" href="{{ url('/subcategoria/'.$row->slug) }}">{{ $row->categoria }}</a>
                             @endforeach
                             @if ( count($categorias) == 0)
@@ -36,7 +44,7 @@
                    </div>
                     <div class="panel panel-search panel-default">
                        <div class="panel-heading">
-                           <h5>En Descripcion </h5>
+                           <h5>En Descripción </h5>
                        </div>
                        <div class="panel-body list-group">
                         @foreach ($descripcion as $row)

@@ -32,7 +32,7 @@ class SiteController extends Controller
 
         $descripcion = DB::table('empresas')->where('descripcion', 'like', '%'.$q.'%')->paginate(10);
 
-        return view('search', ['categorias' => $categorias, 'empresas' => $empresas, 'descripcion' => $descripcion] );
+        return view('search', ['categorias' => $categorias, 'empresas' => $empresas, 'descripcion' => $descripcion,'termino'=> $q]);
     }
 
     public function categoria($slug)

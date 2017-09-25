@@ -14,6 +14,10 @@ a { color: #464646; }
     height: 435px;
     width: 100%;
 }
+.variable-title{
+    font-size: 2em;
+    font-weight: bold;
+}
 /*-boton amarillo-*/
 .btn-yellow{
     background: #004488 !important;
@@ -293,7 +297,7 @@ div.bigstars div.rateit-reset:hover
 .pagination{vertical-align: middle;}
 .breadcrumb{background-color: transparent !important; font-size: 12px; padding-left: 0; margin-bottom: 0; }
 
-
+/*STICKY SOCIAL*/
 #sticky-social ul {
     list-style: none;
     margin: 0;
@@ -337,13 +341,6 @@ div.bigstars div.rateit-reset:hover
 #sticky-social a[class*="instagrem"],
 #sticky-social a[class*="instagrem"]:hover,
 #sticky-social a[class*="instagrem"] span { background: #517fa4; }
-
-.cat-list a {color: #004488;}
-.blue {color: #004488;}
-
-
-.titulo-resulato{background-color: #f1f1f1; margin: 10px 0; padding: 5px; font-size: 20px;}
-
 
 
 #portfolio .portfolio-item {
