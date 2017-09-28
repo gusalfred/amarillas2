@@ -25,7 +25,6 @@ Route::get('/politicas_de_privacidad', function () { return view('estatic.politi
 Route::get('/terminos', function () { return view('estatic.terminos'); });
 Route::get('/anuncie', function () { return view('estatic.anuncie'); });
 Route::get('/contacto', function () { return view('estatic.contacto'); });
-Route::get('/admin',function(){return view('eeee');});
 // social
 Route::get('/redirect/{provider}','SocialAuthController@redirect');
 Route::get('/callback/{provider}','SocialAuthController@callback');

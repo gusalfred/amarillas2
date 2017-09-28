@@ -7,17 +7,30 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed btn-yellow" data-toggle="collapse" data-target="#menu-collapsible">
+      <button type="button" class="navbar-toggle btn-menu btn-yellow" data-toggle="collapse" data-target="#menu-collapsible">
         <span class="fa fa-bars fa-lg"></span>
       </button>
-    <button class="navbar-toggle btn-search" data-toggle="collapse" data-target="#menu-search">
-        <span class="glyphicon glyphicon-search fa fa-lg"></span>
-    </button>
+      <button type="submit" class="navbar-toggle btn-search" data-toggle="collapse" data-target="#menu-collapsible">
+          <span class="glyphicon glyphicon-search fa fa-lg"></span>
+      </button>
       <a href="{{ url('/') }}"><img id="logo"  class="navbar-brand" src="{{asset('images/logo.png')}}"/></a>
     </div>
         <!--menu de sesion y otras cosas-->
     <div class="collapse navbar-collapse" id="menu-collapsible">
-      <ul class="nav navbar-nav navbar-right">
+      <form class="navbar-form navbar-left search-md" method="get" action="{{ url('/search/') }}">
+          <div class="input-group">
+              <input name="q" type="text" class="form-control fsearch" placeholder="¿Que Buscas?">
+              <span class="input-group-btn">
+                  <button type="submit" class="btn btn-default">
+                      <span class="glyphicon glyphicon-search"></span>
+                  </button>
+                  <button  class="btn btn-danger hidden limpiar">
+                      <i class="fa fa-close"></i>
+                  </button>
+              </span>                
+          </div>            
+      </form>
+      <ul class="nav navbar-nav navbar-right" id="menuUser">
         @if (Auth::guest())
         <li>
             <a href="{{ url('/login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Iniciar sesión</a>
@@ -30,7 +43,7 @@
               <i class="fa fa-user"></i> {{ Auth::user()->name }} 
           </li>
           <li class=" text-center">
-             <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+             <a href="{{ url('/logout') }}" class="text-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="fa fa-sign-out" aria-hidden="true"></i> Salir
             </a>
             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
@@ -39,28 +52,23 @@
           </li>
         @endif
       </ul>
-        <form class="navbar-form navbar-left" id="search-md" method="get" action="{{ url('/search/') }}">
-            <div class="input-group">
-                <input name="q" type="text" class="form-control fsearch" placeholder="¿Que Buscas?">
-                <span class="input-group-btn">
-                    <button type="submit" class="btn btn-default">
-                        Ir
-                    </button>
-                </span>                
-            </div>            
-        </form>
     </div>
-        
-    <div class="collapse navbar-collapse" id="menu-search" style="display:none !important">
-       <form class="navbar-form input-group input-group-lg" method="get" action="{{ url('/search/') }}">
-            <input name="q" type="text" class="form-control fsearch" placeholder="¿Que Buscas?">
-            <span class="input-group-btn">
-                <button type="submit" class="btn btn-default">
-                   Ir
-                </button>
-            </span>            
-        </form>
-    </div>
+    <!--barra de busqueda en navbar
+    <div class="collapse navbar-collapse" id="menu-search">
+       <form class="navbar-form" method="get" action="{{ url('/search/') }}">
+        <div class="input-group input-group-lg">
+          <input name="q" type="text" class="form-control fsearch mobileSearch" placeholder="¿Que Buscas?">
+          <span class="input-group-btn">
+              <button  class="btn btn-danger hidden limpiar">
+                      <i class="fa fa-close"></i>
+              </button>
+              <button type="submit" class="btn btn-default">
+                 Ir
+              </button>
+          </span> 
+        </div>
+       </form>       
+    </div>-->
   </div>
 </nav>
 <!--/navbar movil-->
@@ -76,15 +84,20 @@
 
 <script>
     $(document).ready(function() {
-    
+ 
+    //popover
      $('[data-toggle="popover"]').popover({
       html:true,
       content: $('#telfPlus').html()
      });
+     //tooltip
      $('[data-toggle="tooltip"]').tooltip({
       html: true,
       content: 'limpiar puntuación'
      });
+     //dropdown
+     $('[data-toggle="dropdown"]').dropdown();
+     
         $('.slider').slick({
             infinite: true,
             dots:true,

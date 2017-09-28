@@ -10,16 +10,29 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed btn-yellow" data-toggle="collapse" data-target="#menu-collapsible">
+      <button type="button" class="navbar-toggle  btn-yellow" data-toggle="collapse" data-target="#menu-collapsible">
         <span class="fa fa-bars fa-lg"></span>
       </button>
-    <button class="navbar-toggle btn-search" data-toggle="collapse" data-target="#menu-search">
-        <span class="glyphicon glyphicon-search fa fa-lg"></span>
-    </button>
-      <a href="{{ url('/') }}"><img id="logo"  class="navbar-brand" style="margin-" src="{{asset('images/logo.png')}}"/></a>
+      <button type="button" class="navbar-toggle btn-search" data-toggle="collapse" data-target="#menu-collapsible">
+          <span class="glyphicon glyphicon-search fa fa-lg"></span>
+      </button>
+      <a href="{{ url('/') }}"><img id="logo"  class="navbar-brand" src="{{asset('images/logo.png')}}"/></a>
     </div>
         <!--menu de sesion y otras cosas-->
     <div class="collapse navbar-collapse" id="menu-collapsible">
+       <form class="navbar-form navbar-left search-md" method="get" action="{{ url('/search/') }}">
+          <div class="input-group">
+              <input name="q" type="text" class="form-control fsearch" placeholder="¿Que Buscas?">
+              <span class="input-group-btn">
+                  <button type="submit" class="btn btn-default">
+                      <span class="glyphicon glyphicon-search"></span>
+                  </button>
+                  <button  class="btn btn-danger hidden limpiar">
+                      <i class="fa fa-close"></i>
+                  </button>
+              </span>                
+          </div>            
+      </form>
       <ul class="nav navbar-nav navbar-right">
         @if (Auth::guest())
         <li>
@@ -33,8 +46,8 @@
               <i class="fa fa-user"></i> {{ Auth::user()->name }} 
           </li>
           <li class=" text-center">
-             <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                <i class="fa fa-sign-out" aria-hidden="true"></i> Salir
+             <a href="{{ url('/logout') }}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <span class="text-danger"><i class="fa fa-power-off" aria-hidden="true"></i> Salir</span>
             </a>
             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                 {{ csrf_field() }}
@@ -42,27 +55,6 @@
           </li>
         @endif
       </ul>
-        <form class="navbar-form navbar-left" id="search-md" method="get" action="{{ url('/search/') }}">
-            <div class="input-group">
-                <input name="q" type="text" class="form-control fsearch" placeholder="¿Que Buscas?">
-                <span class="input-group-btn">
-                    <button type="submit" class="btn btn-default">
-                       <i class="fa fa-search"></i>
-                    </button>
-                </span>                
-            </div>            
-        </form>
-    </div>
-        
-    <div class="collapse navbar-collapse" id="menu-search" style="display:none !important">
-       <form class="navbar-form input-group input-group-lg" method="get" action="{{ url('/search/') }}">
-            <input name="q" type="text" class="form-control fsearch" placeholder="¿Que Buscas?">
-            <span class="input-group-btn">
-                <button type="submit" class="btn btn-default">
-                  <i class="fa fa-search"></i>
-                </button>
-            </span>            
-        </form>
     </div>
   </div>
 </nav>
@@ -92,23 +84,26 @@
                 @endif
             </div>
             <div class="col-sm-12 col-md-12 center-block">
-            <div class="row">
-              <div class="col-sm-12">
-                <h3 class="search-title " >
-                <p>
-                  Encuentra eso que necesitas
-                </p>
-                </h3>
-              </div>              
-            </div>            
-                <form class="form-search input-group input-group-lg" method="get" action="{{ url('/search/') }}">
-                    <input name="q" type="text" class="form-control " placeholder="¿Que Buscas?">
-                    <span class="input-group-btn">
-                        <button type="submit" class="btn btn-default">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>                    
-                </form>
+              <div class="row">
+                <div class="col-sm-12">
+                  <h3 class="search-title " >
+                  <p>
+                    Encuentra eso que necesitas
+                  </p>
+                  </h3>
+                </div>              
+              </div>            
+              <form class="form-search input-group input-group-lg" method="get" action="{{ url('/search/') }}">
+                  <input name="q" type="text" class="form-control" placeholder="¿Que Buscas?">
+                  <span class="input-group-btn">
+                      <button type="submit" class="btn btn-default">
+                          <span class="glyphicon glyphicon-search"></span>
+                      </button>
+                      <button  class="btn btn-danger hidden limpiar">
+                          <i class="fa fa-close"></i>
+                      </button>
+                  </span>                    
+              </form>
             </div>
         </div>
     </div>

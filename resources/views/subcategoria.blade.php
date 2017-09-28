@@ -11,7 +11,7 @@
 <div class="container" style="margin-top: 50px;">
 
     <div class="row" style="margin-top: 20px;">
-            <ol class="breadcrumb">
+            <ol class="breadcrumb ">
                 <li><a href="{{ url('/')  }}"><i class="fa fa-home"></i> amarillas365.com</a></li>
                 <li><a href="{{ url('/categoria/'.$cat1->slug)  }}">{{ substr($cat1->categoria, 0, 30) }} ...</a></li>
                 <li class="active">{{ substr($cat2->categoria, 0, 30) }}...</li>

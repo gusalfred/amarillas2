@@ -67,7 +67,7 @@ a { color: #464646; }
     font-weight: bold;
 }
 /*barra de busqueda navbar*/
-#search-md{
+.search-md{
     margin-left: 190px;
     width: 40%;
     }
@@ -295,7 +295,7 @@ div.bigstars div.rateit-reset:hover
 }
 
 .pagination{vertical-align: middle;}
-.breadcrumb{background-color: transparent !important; font-size: 12px; padding-left: 0; margin-bottom: 0; }
+.breadcrumb{ margin-bottom: 5px; }
 
 /*STICKY SOCIAL*/
 #sticky-social ul {

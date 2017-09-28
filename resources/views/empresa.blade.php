@@ -47,15 +47,20 @@
                                             {{ $telefonos[0] }}
                                         @endif
                                 @else
-                                    <a class="" data-toggle="popover" data-placement="right" title="<i class='fa fa-plus'></i> Otros telf.">
-                                        {{ $telefonos[0] }} <i class="fa fa-caret-down"></i>
-                                        <ul id="telfPlus" class="hidden">
+                                    <div class="dropdown" style="display:inline">
+                                        <a class="" data-toggle="dropdown">
+                                            {{ $telefonos[0] }}
+                                            <i class="fa fa-caret-down"></i>
+                                        </a>
+                                        <ul id="telfPlus" class="dropdown-menu" style="color:white">
+                                        <li class="text-center"><i class="fa fa-plus"></i> Mas Telf.</li>
+                                        <li class="divider"></li>
                                            @foreach ($telefonos as $tel) <li>{{ $tel }}</li> @endforeach 
                                         </ul>
-                                    </a>
+                                    </div>
                                 @endif    
                             </div>
-                            <div class="col-md-3  col-xs-12 " style="margin-top: 10px">
+                            <div class="col-md-6  col-xs-12 " style="margin-top: 10px">
                                 <a href="mailto:{{ $empresa->email }}"><i class="fa fa-2x fa-envelope-o"></i> Contactar</a>
                             </div>
                             <div class="col-md-6  col-xs-12 " style="margin-top: 10px">
@@ -108,7 +113,7 @@
                                 var myLatLng = {lat: {{ $empresa->latitud }}, lng: {{ $empresa->longitud }} };
                     
                                 var map = new google.maps.Map(document.getElementById('map'), {
-                                    zoom: 13,
+                                    zoom: 16,
                                     mapTypeControl: false,
                                     streetViewControl: false,
                                     fullscreenControl: false,
@@ -127,10 +132,12 @@
                         </script>
                     </div>
                     <div class="panel-footer map-box" style="vertical-align:middle">
-                    @if(count($direcciones)<=0)
+                    @if(isset($empresa->direccion))
                         <h5 style="color:white;margin:0px"><i class="fa fa-map-marker"></i> {{ $empresa->direccion }}</h5>
+                    @elseif(count($direcciones)>1)
+                        <h4><a href="#" data-toggle="modal" data-target="#direc"><i class="fa fa-dot-circle-o"></i> Ver todas las sucursales</a></h4>
                     @else
-                       <h4><a href="#" data-toggle="modal" data-target="#direc"><i class="fa fa-dot-circle-o"></i> Ver todas las sucursales</a></h4>
+                        <h5 style="color:white;margin:0px"><i class="fa fa-question-circle-o"></i> Sin descripción de dirección</h5>
                     @endif
                     </div>
                 </div>
