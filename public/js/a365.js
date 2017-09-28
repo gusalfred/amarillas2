@@ -19,11 +19,11 @@ function showHide(){
 }
 //altura completa
 function allHeight(){
-  var WinWidth=$(window).width();   //captura la anchura
-    var tamano= $('.fullheight').attr('height'); //captura el alto del elemento especificado por este atributo
-    if(WinWidth<=750){        //si la anhura de la pantalla es menor adapta la altura al tamaño especificado
+  var WinWidth=$(window).width();                   //captura la anchura
+    var tamano= $('.fullheight').attr('height');    //captura el alto del elemento especificado por este atributo
+    if(WinWidth<=750){                              //si la anhura de la pantalla es menor adapta la altura al tamaño especificado
       $('.fullheight').outerHeight(tamano);
-    }else{        //si no captura la altura de la ventana y de las 2 partes q conforman el footer para darle el tamaño al conenido
+    }else{                                          //si no captura la altura de la ventana y de las 2 partes q conforman el footer para darle el tamaño al conenido
        var WinHeight=$(window).height();
         var foot1H= $('#footer-box').outerHeight(true);
         var foot2H= $('footer').outerHeight(true);
@@ -32,6 +32,7 @@ function allHeight(){
     
 }
 
+//ejecuta las funciones de reposicionamiento al cambiar el tamaño de la pantalla
 $(window).resize(function(){
     allHeight();
     showHide();
@@ -39,24 +40,25 @@ $(window).resize(function(){
 
 //document ready ejecuta las funciones de cuadre de elementos
 $(document).ready(function(){
-  $('[name="q"]').val('');
+  $('[name="q"]').val('');          //limpia los cuadros de busqueda
     showHide();
-    allHeight(false);
+    allHeight();
     });
 
 //funciones en scroll
 $(window).scroll(function() {
-    if ($(document).scrollTop() > 240) {
-        $('#menu-collapsible').collapse('hide');
-        $('.home').css('top','0px');
+    if ($(document).scrollTop() > 240) {           
+        $('.home').css('top','0px');                //muestra el navbar
     }
     if ($(document).scrollTop() < 240) {
-         $('.home').css('top','-100px');
+         $('.home').css('top','-100px');             //muestra el navbar
+         $('#menu-collapsible').collapse('hide');    //oculta el menu si esta desplegado
     }
 });
-function botonLimpia(){
-  
-}
+$(document).on('click','.btn-search',function(){
+    $('.navbar-form [name="q"]').focus();
+    });
+//funcion para mostrar el boton de limpar cuadro de busqueda
 $(document).on('keyup','[name="q"]',function(){
     var valor=$(this).val();
     $('[name="q"]').val(valor);

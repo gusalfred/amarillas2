@@ -105,7 +105,6 @@
             adaptiveHeight:false,
             variableWidth:true,
             centerMode:true,
-            //<button class="btn btn-default slick-prev text-center" style="border-radius:50%"><i class="fa fa-lg fa-chevron-left"></i></button>
             prevArrow:'<button class="btn btn-default slick-prev2 text-center"><i class="fa fa-lg fa-chevron-left"></i></button>',
             nextArrow:'<button class="btn btn-default slick-next2 text-center pull-right"><i class="fa fa-lg fa-chevron-right"></i></button>',
             responsive: [{

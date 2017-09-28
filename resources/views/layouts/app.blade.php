@@ -58,14 +58,36 @@
     </div>
   </div>
 </nav>
-        <!--/navbar movil-->
+<!--/navbar movil-->
+
 <header id="a365-header" >
     <div class="container">
         <div class="row">
+        <!--menu de usuario q s emuestra en disp pequeños-->
+        <div class="col-sm-12 col-md-3 col-md-offset-6 text-center hidden-md hidden-lg" style="padding-top: 15px;padding-bottom: 15px;" id="session-act">
+                @if (Auth::guest())
+                <a href="{{ url('/login') }}">
+                  <i class="fa fa-sign-in"></i> Iniciar sesión
+                </a> |
+                <a href="{{ url('register') }}">
+                  <i class="fa fa-user-plus"></i> Registrarse
+                </a>
+                @else
+                    <span><i class="fa fa-user"></i> {{ Auth::user()->name }} </span>|
+                    <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i> Salir
+                    </a>
+                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
+                @endif
+            </div>
+            <!--logo-->
             <div class=" col-sm-12 col-md-3">
                 <a href="{{ url('/') }}"><img id="logo"  style="width:80%" class="img-responsive center-block " src="{{asset('images/logo.png')}}"/></a>
             </div>
-            <div class="col-sm-12 col-md-3 col-md-offset-6 text-center" style="padding-top: 15px;" id="session-act">
+              <!--menu de usuario q s emuestra en disp med y G-->
+            <div class="col-sm-12 col-md-3 col-md-offset-6 text-center hidden-sm hidden-xs" style="padding-top: 15px;" id="session-act">
                 @if (Auth::guest())
                 <a href="{{ url('/login') }}">
                   <i class="fa fa-sign-in"></i> Iniciar sesión
@@ -86,7 +108,7 @@
             <div class="col-sm-12 col-md-12 center-block">
               <div class="row">
                 <div class="col-sm-12">
-                  <h3 class="search-title " >
+                  <h3 class="search-title" >
                   <p>
                     Encuentra eso que necesitas
                   </p>
@@ -109,11 +131,7 @@
     </div>
 </header>
 
-<div class="banner-home" data-stellar-background-ratio="0.5">
-    <div class="container">
-
-    </div>
-</div>
+<div class="banner-home" data-stellar-background-ratio="0.5"></div>
 
 <div style="background-color: #eee; margin-bottom: 20px;">
     <div class="container">
@@ -142,39 +160,6 @@
 <script>
     $(document).ready(function () {
          $.stellar({horizontalScrolling: false,responsive:true, verticalOffset: 50});
-        //$('#input-3').rating({displayOnly: true, step: 0.5});
-
-        var config = {
-            url: window.location.href,
-            ui: {
-                flyout: 'top left',
-                button_font: false,
-                buttonText: 'Compartir',
-                icon_font: false
-            },
-            networks: {
-                googlePlus: {enabled: true, url: ''},
-                twitter: {enabled: true, url: '', description: ''},
-                facebook: {
-                    enabled: true,
-                    load_sdk: true,
-                    url: '',
-                    appId: '',
-                    title: '',
-                    caption: '',
-                    description: '',
-                    image: ''
-                },
-                pinterest: {enabled: true, url: '', image: '', description: ''},
-                reddit: {enabled: false},
-                linkedin: {enabled: false},
-                whatsapp: {enabled: false},
-                email: {enabled: false}
-            }
-        }
-
-        var shareButton = new ShareButton('', config);
-
     });
     
 //LOCALIZACION

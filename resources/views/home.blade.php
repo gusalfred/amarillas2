@@ -14,16 +14,20 @@
             <?php $row = 1; ?>
             @foreach ($categorias as $categoria)
             <div class="col-sm-6 col-md-4 portfolio-item">
-                <a href="{{ url('categoria/'.$categoria->slug) }}" class="portfolio-link" data-toggle="modal">
-                    <div class="portfolio-hover">
-                        <div class="portfolio-hover-content">
-                            <i class="fa fa-plus fa-3x"></i>
-                        </div>
+                <div class="jumbotron" style="padding:0px">
+                    <div class="jumbotron-photo">
+                        <a href="{{ url('categoria/'.$categoria->slug) }}" class="portfolio-link">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content">
+                                    <i class="fa fa-plus fa-3x"></i>
+                                </div>
+                            </div>
+                            <img src="uploads/categorias/{{ isset($categoria->imagen) ? $categoria->imagen : 'no.jpg' }}" style="width:100%" class="img-responsive">
+                        </a>
                     </div>
-                    <img src="uploads/categorias/{{ isset($categoria->imagen) ? $categoria->imagen : 'no.jpg' }}" style="width:100%" class="img-responsive">
-                </a>
-                <div class="portfolio-caption">
-                    <h4 style="height: 40px;">{{ $categoria->categoria }}</h4>
+                    <div class="jumbotron-contents portfolio-caption" >
+                        <h4 style="height: 40px;">{{ $categoria->categoria }}</h4>
+                    </div>
                 </div>
             </div>
             <?php $row++; ?>

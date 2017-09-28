@@ -50,7 +50,7 @@ $EW_FONT_PATH = realpath('./font');
 define("EW_CONN_HOST", 'localhost', TRUE);
 define("EW_CONN_PORT", 3306, TRUE);
 define("EW_CONN_USER", 'root', TRUE);
-define("EW_CONN_PASS", '1416', TRUE);
+define("EW_CONN_PASS", '', TRUE);
 define("EW_CONN_DB", 'amarillas365', TRUE);
 
 // Set up database error function
