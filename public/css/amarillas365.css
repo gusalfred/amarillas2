@@ -1,4 +1,21 @@
-body{font-family: 'Lato', sans-serif; color: #464646;}
+@font-face{
+    font-family: 'Lato';
+    src: url(../fonts/Lato-Regular.ttf);
+}
+@font-face{
+    font-family: 'Montserrat-alt';
+    src: url(../fonts/Montserrat-Regular.ttf);
+}
+@font-face{
+    font-family: 'roboto';
+    src: url(../fonts/Roboto-Regular.ttf);
+}
+h1,h2,h3,h4,h5{
+    font-family: 'Lato';
+}
+body{
+    font-family: 'Lato';
+    color: #464646;}
 a { color: #464646; }
 
 #logo{padding-top: 5px;}

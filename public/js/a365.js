@@ -43,6 +43,7 @@ $(document).ready(function(){
   $('[name="q"]').val('');          //limpia los cuadros de busqueda
     showHide();
     allHeight();
+    
     });
 
 //funciones en scroll
@@ -55,9 +56,12 @@ $(window).scroll(function() {
          $('#menu-collapsible').collapse('hide');    //oculta el menu si esta desplegado
     }
 });
+
+//accion para enfocarse en el cuadro de buqueda al hacer click en el boton de busqueda en el navbar movil
 $(document).on('click','.btn-search',function(){
     $('.navbar-form [name="q"]').focus();
     });
+
 //funcion para mostrar el boton de limpar cuadro de busqueda
 $(document).on('keyup','[name="q"]',function(){
     var valor=$(this).val();
@@ -69,6 +73,7 @@ $(document).on('keyup','[name="q"]',function(){
     }
   });
 
+//funcion para limpiar el cuadro de busqueda
 $(document).on('click','.limpiar',function(e){
   e.preventDefault();
   $('.limpiar').addClass('hidden');

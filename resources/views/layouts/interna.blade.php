@@ -84,7 +84,6 @@
 
 <script>
     $(document).ready(function() {
- 
     //popover
      $('[data-toggle="popover"]').popover({
       html:true,
