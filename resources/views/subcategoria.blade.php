@@ -18,14 +18,14 @@
             </ol>
     <!--categorias-->
         <div class="col-md-8">
-        @if($empresas->total() < 0)
+        @if($empresas->total() <= 0 )
             <h1>no hay resultados</h1>
-        @endif
+        @else
             @foreach ($empresas as $empresa)
-                <?php $url = 'empresa/'.$empresa->id_empresa_direccion.'/slug'.$empresa->slug ?>
+                
                     @if( $empresa->id_aviso )
                         <h5 style="font-size: 11px; color: #CCC; text-align: center;margin:0px">Publicidad </h5>
-                        <a href="{{ URL::to($url) }}" >
+                        <a href="{{ URL::to('empresa/'.$empresa->id_empresa_direccion.'/'.$empresa->slug) }}" >
                             <img src="{{ url('uploads/avisos/'.$empresa->archivo) }}" class="img-responsive center-block" alt="" style="margin-bottom:15px">
                         </a>                    
                     @endif
@@ -35,10 +35,10 @@
                             <div class="row">
                                 <div class="col-md-10 col-sm-12">
                                     <h3 style="margin-top:0px" class="hidden-sm hidden-xs">
-                                        <a href="{{ URL::to($url) }}">{{ $empresa->nombre }}</a>
+                                        <a href="{{ URL::to('empresa/'.$empresa->id_empresa_direccion.'/'.$empresa->slug) }}">{{ $empresa->nombre }}</a>
                                     </h3>
                                     <h4 style="margin-top:0px" class="hidden-md hidden-lg">
-                                        <a href="{{ URL::to($url) }}">{{ $empresa->nombre }}</a>
+                                        <a href="{{ URL::to('empresa/'.$empresa->id_empresa_direccion.'/'.$empresa->slug) }}">{{ $empresa->nombre }}</a>
                                     </h4>
                                 </div>
                                 <div class="col-md-2 center-text">
@@ -66,6 +66,7 @@
                         </div>
                     </div>
             @endforeach
+            @endif
             <!--paginador-->
             <div class="text-center">
                 {{ $empresas->appends(['q' => 'a'])->links() }}
@@ -74,21 +75,21 @@
         </div>
         <div class="col-md-4">
             <div style="font-size: 16px; margin-bottom: 15px; text-align: center;"> <b><i class="fa fa-hand-o-right"></i> Empresas Relacionadas</b></div>
-
-            @foreach ($relacionados as $empresa)
-                <div class="panel panel-default col-md-12">
-                    <div class="panel-body">
-                        <p class="box-title" style="margin-top:0px" class="hidden-sm hidden-xs">
-                            <a href="{{ URL::to($url) }}">{{ $empresa->nombre }}</a>
-                        </p>
-                        <p>{{ $empresa->descripcion }}</p>
-                        <div>
-                            <div class="rateit relate" data-rateit-value=""  data-rateit-ispreset="true" data-rateit-readonly="true"></div>
-                        </div>                        
+                @foreach ($relacionados as $empresa)
+                    <div class="panel panel-default col-md-12">
+                        <div class="panel-body">
+                            <p class="box-title" style="margin-top:0px" class="hidden-sm hidden-xs">
+                                <a href="{{ URL::to('empresa/'.$empresa->id_empresa) }}">{{ $empresa->nombre }}</a>
+                            </p>
+                            <p>{{ $empresa->descripcion }}</p>
+                            <div>
+                                <div class="rateit relate" data-rateit-value=""  data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+                            </div>                        
+                        </div>
                     </div>
-                </div>
-            @endforeach
-
+                @endforeach
+            
+            
             @foreach ($avisos as $aviso)
                 <div style="font-size: 11px; color: #CCC; text-align: center;">Publicidad </div>
                 <div style="margin: 3px 0 20px 0;">

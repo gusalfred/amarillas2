@@ -15,7 +15,7 @@ Route::get('/', 'SiteController@index');
 Route::get('/search', 'SiteController@search');
 Route::get('/categoria/{slug}', 'SiteController@categoria');
 Route::get('/subcategoria/{slug}', 'SiteController@subcategoria');
-Route::get('/empresa/{id}/{slug}', 'SiteController@empresa');
+Route::get('/empresa/{id}/{slug?}', 'SiteController@empresa');
 Route::get('/registro_empresa', 'SiteController@registro_empresa');
 Route::post('/comentar', 'SiteController@comentar');
 

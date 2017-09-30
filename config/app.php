@@ -181,6 +181,7 @@ return [
         // Other service providers...
         Laravel\Socialite\SocialiteServiceProvider::class,
         Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
+        
     ],
 
     /*

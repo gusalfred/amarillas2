@@ -72,23 +72,24 @@ class SiteController extends Controller
             ->join('empresas_categorias', 'empresas_direcciones.id_empresa', '=', 'empresas_categorias.id_empresa')
             ->join('categorias_nivel2', 'empresas_categorias.id_categoria_nivel2', '=', 'categorias_nivel2.id_categoria_nivel2')
             ->where('id_categoria_nivel1', $cat1->id_categoria_nivel1)
-            //->inRandomOrder()
             ->limit(4)
             ->get();
-
+           // return dd($relacionados);
+        
         $avisos = DB::table('avisos')
-            ->join('avisos_categorias', 'avisos.id_aviso', '=', 'avisos_categorias.id_aviso')
-            //->join('avisos_ubicaciones', 'avisos.id_aviso', '=', 'avisos_ubicaciones.id_aviso')
-            ->where('id_categoria_nivel2', $cat2->id_categoria_nivel2)
-            ->inRandomOrder()
-            ->limit(4)
-            ->get();
-
-
+                ->join('avisos_categorias', 'avisos.id_aviso', '=', 'avisos_categorias.id_aviso')
+                    //->join('avisos_ubicaciones', 'avisos.id_aviso', '=', 'avisos_ubicaciones.id_aviso')
+                ->where('id_categoria_nivel2', $cat2->id_categoria_nivel2)
+                ->inRandomOrder()
+                ->limit(4)
+                ->get();
+        
+        
         return view('subcategoria', compact('cat1', 'cat2', 'empresas','relacionados', 'avisos'));
+            
     }
 
-    public function empresa($id, $slug)
+    public function empresa($id)
     {
         $empresa = DB::table('empresas_direcciones')
             ->join('empresas', 'empresas_direcciones.id_empresa', '=', 'empresas.id_empresa')
