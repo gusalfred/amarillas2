@@ -28,12 +28,16 @@
              @endif--}}
             <div class="row">
                 <div class="col-md-12">
+                @if(!isset($empresa->archivo))
+                    <h5 style="font-size: 11px; color: #CCC; text-align: center;margin:0px">Sin Avisos publicados </h5>
+                @else
                     <h5 style="font-size: 11px; color: #CCC; text-align: center;margin:0px">Avisos </h5>
                     <img src="{{ url('uploads/avisos/'.$empresa->archivo) }}" class="img-responsive center-block" alt="">
+                @endif
                 </div> 
                 <div class="col-md-12">
-                     <p class="text-justify">
-                     {{ isset($empresa->descripcion) ? $empresa->descripcion:'Sin descripción'}}
+                     <p class="text-justify well">
+                     {!! isset($empresa->descripcion) ? $empresa->descripcion:'<i class="fa fa-file-text-o text-danger"></i> Sin descripción' !!}
                      </p>
                     <div class="panel panel-default">
                         <div class="panel-body row">
@@ -82,7 +86,7 @@
                 </div>
                 <!--fotos-->
                 <div class="col-md-12">
-                    <h4 style="margin:0px"><i class="fa fa-picture-o fa-lg"></i> Más fotos</h4>
+                    <h4 style="margin:0px"><i class="fa fa-picture-o fa-lg"></i> Fotos</h4>
                         <div class="row">
                             <div class="slider col-md-12 col-xs-12" >
                             @if (count($imagenes)>0)
@@ -94,7 +98,7 @@
                             @else
                                 <div class="slider-item">
                                     <img src="{{ url('uploads/categorias/no.jpg') }}" style="height: 200px;">
-                                    <p class="text-center">No hay mas fotos <i class="fa fa-meh-o"></i> </p>
+                                    <p class="text-center">Sin fotos <i class="fa fa-meh-o"></i> </p>
                                 </div>
                             @endif
                             </div>
@@ -145,10 +149,19 @@
                      <h4 style="vertical-align:middle"><i class=" glyphicon glyphicon-print"></i> Imprimir direcciones</h4>
                 </div>
                 <div class="col-md-12">
-                    <h4>Redes sociales</h4>
+                    <h4>Redes Sociales</h4>
                     @foreach($redes as $red)
                         <a href="{{ $red->url }}" target="_blank"><p><i class="{{ $red->icon_class }} fa-2x" style="color: {{ $red->color }};"></i></p></a>
                     @endforeach
+                </div>
+                <div class="col-md-12">
+                    <h4>Subcategorias en donde se puede encontrar</h4>
+                        <ul>
+                        {{$empresa->id_empresa}}
+                        @foreach($categorias as $cat2)
+                           <li>{{$cat2->id_empresa_categoria}}</li>
+                        @endforeach
+                        </ul>                   
                 </div>
             </div>
         </div>

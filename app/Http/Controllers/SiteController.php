@@ -74,11 +74,10 @@ class SiteController extends Controller
             ->where('id_categoria_nivel1', $cat1->id_categoria_nivel1)
             ->limit(4)
             ->get();
-           // return dd($relacionados);
+          
         
         $avisos = DB::table('avisos')
                 ->join('avisos_categorias', 'avisos.id_aviso', '=', 'avisos_categorias.id_aviso')
-                    //->join('avisos_ubicaciones', 'avisos.id_aviso', '=', 'avisos_ubicaciones.id_aviso')
                 ->where('id_categoria_nivel2', $cat2->id_categoria_nivel2)
                 ->inRandomOrder()
                 ->limit(4)
@@ -96,14 +95,17 @@ class SiteController extends Controller
             ->leftJoin('avisos', 'empresas.id_empresa', '=', 'avisos.id_empresa')
             ->where('id_empresa_direccion', $id)->first();
         $id_empresa = $empresa->id_empresa;
-
+        
+        $categorias= DB::table('empresas_categorias')
+        ->join('categorias_nivel2','empresas_categorias.id_categoria_nivel2','=','categorias_nivel2.id_categoria_nivel2')
+        ->where('id_empresa',$id_empresa)->get();
+        dd($empresa);
         $direcciones = DB::table('empresas_direcciones')->where('id_empresa', $id_empresa)->get();
 
         $imagen = DB::table('empresas_media')->where([
             ['id_empresa', $id_empresa],
             ['nombre', 'principal']
-            ]
-        )->first();
+            ])->first();
 
         $imagenes = DB::table('empresas_media')->where([
                 ['id_empresa', $id_empresa]
@@ -119,7 +121,7 @@ class SiteController extends Controller
             ->join('users', 'users.id', '=', 'empresas_valoraciones.id_usuario')
             ->where('id_empresa', $id_empresa)->get();
 
-        return view('empresa', compact('empresa', 'direcciones', 'imagenes', 'imagen', 'redes', 'comentarios') );
+        return view('empresa', compact('empresa','categorias','direcciones', 'imagenes', 'imagen', 'redes', 'comentarios') );
     }
 
     public function registro_empresa()

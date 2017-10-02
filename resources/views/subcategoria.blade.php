@@ -19,7 +19,7 @@
     <!--categorias-->
         <div class="col-md-8">
         @if($empresas->total() <= 0 )
-            <h1>no hay resultados</h1>
+            <h2 class="text-center"> Sin resultados <i class="fa fa-meh-o"></i></h2>
         @else
             @foreach ($empresas as $empresa)
                 
@@ -57,7 +57,7 @@
                                 <!--comentarios y social-->
                             <div class="row">
                                 <div class="col-xs-8 col-md-10"><span class="box-comments">
-                                    <i class="fa fa-comment-o" style="font-size: 14px;"></i> {{ $empresa->comentarios }} comentarios</span>
+                                    <i class="fa fa-comment-o" style="font-size: 14px;"></i> {{ count($empresa->comentarios) }} comentarios</span>
                                 </div>
                                 <div class="col-xs-4 col-md-2">
                                     <share-button></share-button>
@@ -68,10 +68,12 @@
             @endforeach
             @endif
             <!--paginador-->
+             @if($empresas->total() > 0 )                
             <div class="text-center">
                 {{ $empresas->appends(['q' => 'a'])->links() }}
                 <p class="text-center">Resultados {{ $empresas->firstItem() }}-{{ $empresas->lastItem() }} de  {{ $empresas->total() }}</p>
             </div>
+            @endif
         </div>
         <div class="col-md-4">
             <div style="font-size: 16px; margin-bottom: 15px; text-align: center;"> <b><i class="fa fa-hand-o-right"></i> Empresas Relacionadas</b></div>
