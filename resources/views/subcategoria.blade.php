@@ -23,10 +23,10 @@
         @else
             @foreach ($empresas as $empresa)
                 
-                    @if( $empresa->id_aviso )
+                    @if( count($avisos) > 0 )
                         <h5 style="font-size: 11px; color: #CCC; text-align: center;margin:0px">Publicidad </h5>
-                        <a href="{{ URL::to('empresa/'.$empresa->id_empresa_direccion.'/'.$empresa->slug) }}" >
-                            <img src="{{ url('uploads/avisos/'.$empresa->archivo) }}" class="img-responsive center-block" alt="" style="margin-bottom:15px">
+                        <a href="{{ URL::to('empresa/'.$aviso->id_empresa.'/'.$empresa->slug) }}" >
+                            <img src="{{ url('uploads/avisos/'.$aviso->archivo) }}" class="img-responsive center-block" alt="" style="margin-bottom:15px">
                         </a>                    
                     @endif
                     <div class="panel panel-default col-md-12">
@@ -35,10 +35,10 @@
                             <div class="row">
                                 <div class="col-md-10 col-sm-12">
                                     <h3 style="margin-top:0px" class="hidden-sm hidden-xs">
-                                        <a href="{{ URL::to('empresa/'.$empresa->id_empresa_direccion.'/'.$empresa->slug) }}">{{ $empresa->nombre }}</a>
+                                        <a href="{{ URL::to('empresa/'.$empresa->id_empresa.'/'.$empresa->slug) }}">{{ $empresa->nombre }}</a>
                                     </h3>
                                     <h4 style="margin-top:0px" class="hidden-md hidden-lg">
-                                        <a href="{{ URL::to('empresa/'.$empresa->id_empresa_direccion.'/'.$empresa->slug) }}">{{ $empresa->nombre }}</a>
+                                        <a href="{{ URL::to('empresa/'.$empresa->id_empresa.'/'.$empresa->slug) }}">{{ $empresa->nombre }}</a>
                                     </h4>
                                 </div>
                                 <div class="col-md-2 center-text">
@@ -57,7 +57,7 @@
                                 <!--comentarios y social-->
                             <div class="row">
                                 <div class="col-xs-8 col-md-10"><span class="box-comments">
-                                    <i class="fa fa-comment-o" style="font-size: 14px;"></i> {{ count($empresa->comentarios) }} comentarios</span>
+                                    <i class="fa fa-comment-o" style="font-size: 14px;"></i> {{ $empresa->comentarios }} comentarios</span>
                                 </div>
                                 <div class="col-xs-4 col-md-2">
                                     <share-button></share-button>

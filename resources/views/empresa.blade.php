@@ -137,7 +137,7 @@
                     </div>
                     <div class="panel-footer map-box" style="vertical-align:middle">
                     @if(isset($empresa->direccion))
-                        <h5 style="color:white;margin:0px"><i class="fa fa-map-marker"></i> {{ $empresa->direccion }}</h5>
+                        <h6 style="color:white;margin:0px"><i class="fa fa-map-marker"></i> {{ $empresa->direccion }}</h6>
                     @elseif(count($direcciones)>1)
                         <h4><a href="#" data-toggle="modal" data-target="#direc"><i class="fa fa-dot-circle-o"></i> Ver todas las sucursales</a></h4>
                     @else
@@ -156,10 +156,10 @@
                 </div>
                 <div class="col-md-12">
                     <h4>Subcategorias en donde se puede encontrar</h4>
+                        
                         <ul>
-                        {{$empresa->id_empresa}}
-                        @foreach($categorias as $cat2)
-                           <li>{{$cat2->id_empresa_categoria}}</li>
+                        @foreach($cat2 as $cat2s)
+                           <li>{{$cat2s->categoria}}</li>
                         @endforeach
                         </ul>                   
                 </div>
@@ -187,7 +187,7 @@
                          <option value="4">4</option>
                          <option value="5">5</option>
                     </select>
-                    <div class="col-md-8 col-xs-12">
+                    <div class="col-md-8 col-xs-12 text-center">
                          <b class="text-center" >Valora esta empresa: </b>
                          <div class="rateit" data-rateit-backingfld="#valor" data-rateit-min="0" style="vertical-align:text-top"></div>                    
                     </div>
@@ -198,18 +198,20 @@
             </form>
             @endif
             <hr>
-            @foreach ($comentarios as $comentario)
-                <div class="media">
-                    <div class="media-left">
-                            <img class="media-object img-circle" src="{{ url('uploads/foto.png') }}" width="60">
-                    </div>
-                    <div class="media-body">
-                        <h5 class="media-heading">{{ $comentario->name }}</h5>
-                        <div>{{ $comentario->comentario }}</div>
-                        <div class="rateit" data-rateit-value="{{ $comentario->valor }}" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
-                    </div>
-                </div>
-            @endforeach
+            <ul class="media-list">
+                @foreach ($comentarios as $comentario)
+                    <li class="media">
+                        <div class="media-left">
+                                <img class="media-object img-circle" src="{{ url('uploads/foto.png') }}" width="60">
+                        </div>
+                        <div class="media-body">
+                            <h5 class="media-heading">{{ $comentario->name }}</h5>
+                            <p>{{ $comentario->comentario }}</p>
+                            <div class="rateit" data-rateit-value="{{ $comentario->valor }}" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+                        </div>
+                    </li>
+                @endforeach
+            </ul>
         </div>
     </div>
 </div>

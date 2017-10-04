@@ -21,7 +21,7 @@ class camarillas365_db {
 	var $Host = 'localhost';
 	var $Port = 3306;
 	var $Username = 'root';
-	var $Password = '1416';
+	var $Password = '';
 	var $DbName = 'amarillas365';
 
 	// ADODB (Access/SQL Server)
