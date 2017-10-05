@@ -18,6 +18,7 @@ Route::get('/subcategoria/{slug}', 'SiteController@subcategoria');
 Route::get('/empresa/{id}/{slug?}', 'SiteController@empresa');
 Route::get('/registro_empresa', 'SiteController@registro_empresa');
 Route::post('/comentar', 'SiteController@comentar');
+Route::get('/categorias/','SiteController@allCategories');
 
 // Estaticos
 Route::get('/nosotros', function () { return view('estatic.nosotros'); });
@@ -28,11 +29,6 @@ Route::get('/contacto', function () { return view('estatic.contacto'); });
 // social
 Route::get('/redirect/{provider}','SocialAuthController@redirect');
 Route::get('/callback/{provider}','SocialAuthController@callback');
-
-
-/*Route::get('/', function () {
-   return view('welcome');
-   });*/
 
 Auth::routes();
 

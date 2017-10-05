@@ -17,7 +17,19 @@ class SiteController extends Controller
 
         return view('home', compact('categorias', 'main') );
     }
-
+    public function allCategories()
+    {
+        $letra='';
+        if(isset($_GET['letter'])){
+            $letra=$_GET['letter'];
+            $categorias = DB::table('categorias_nivel1')->where('categoria','like',$letra.'%')->get();
+        }else{
+            $categorias =  DB::table('categorias_nivel1')->get();           
+        }
+        //dd($letra);
+        return view('categorias',compact('categorias','letra'));
+        
+    }
     public function search()
     {
         $q = $_GET['q'];

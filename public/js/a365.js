@@ -23,11 +23,13 @@ function allHeight(){
     var tamano= $('.fullheight').attr('height');    //captura el alto del elemento especificado por este atributo
     if(WinWidth<=750){                              //si la anhura de la pantalla es menor adapta la altura al tamaño especificado
       $('.fullheight').outerHeight(tamano);
-    }else{                                          //si no captura la altura de la ventana y de las 2 partes q conforman el footer para darle el tamaño al conenido
+      paginaResponsive();                           //funcion paginador responsive 
+    }else{                                              //si no captura la altura de la ventana y de las 2 partes q conforman el footer para darle el tamaño al conenido
        var WinHeight=$(window).height();
         var foot1H= $('#footer-box').outerHeight(true);
         var foot2H= $('footer').outerHeight(true);
         $('.fullheight').outerHeight(WinHeight-foot1H-foot2H-80);
+        $('.btn-group a ').show();                                  //muestra todos los botones del paginador
     }
     
 }
@@ -46,6 +48,17 @@ $(document).ready(function(){
     
     });
 
+//funcion 
+function paginaResponsive(){
+    var items=$('.btn-group a').size();
+    if(items>8){
+        $('.btn-primary').prev().addClass('prev');
+        $('.btn-primary').next().addClass('next');
+        $('.btn-group a ').last().prev().addClass('prev');
+        $('.btn-group a ').first().next().addClass('prev');
+        $('.btn-group a ').not('.prev , .next, .disabled, .btn-primary').hide();
+    }
+}
 //funciones en scroll
 $(window).scroll(function() {
     if ($(document).scrollTop() > 240) {           

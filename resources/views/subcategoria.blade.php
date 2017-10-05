@@ -48,10 +48,10 @@
                                 <!--info telf y address-->
                             <div class="row">
                                  <div class="col-md-12">
-                                    <p><i class="fa fa-map-marker"></i> {{ $empresa->direccion }}</p>
+                                    <p><i class="fa fa-map-marker"></i> {{ isset($empresa->direccion) ?  $empresa->direccion: 'Sin descripción'}}</p>
                                 </div>
                                  <div class="col-md-12">
-                                    <p><i class="fa fa-phone"></i> {{ $empresa->telefonos }}</p>
+                                    <p><i class="fa fa-phone"></i> {{ isset($empresa->telefonos) ? $empresa->telefonos:'S/N'}}</p>
                                  </div>
                             </div>
                                 <!--comentarios y social-->
@@ -89,18 +89,17 @@
                             </div>                        
                         </div>
                     </div>
+                @endforeach        
+                @foreach ($avisos as $aviso)
+                    <div style="font-size: 11px; color: #CCC; text-align: center;">Publicidad </div>
+                    <div style="margin: 3px 0 20px 0;">
+                        @if($aviso->url)
+                            <a target="_blank" href="{{ $aviso->url }}">
+                                <img src="{{ asset('uploads/avisos/'.$aviso->archivo) }}" class="img-responsive">
+                            </a>
+                        @endif
+                    </div>
                 @endforeach
-            
-            
-            @foreach ($avisos as $aviso)
-                <div style="font-size: 11px; color: #CCC; text-align: center;">Publicidad </div>
-                <div style="margin: 3px 0 20px 0;">
-                    @if($aviso->url) <a target="_blank" href="{{ $aviso->url }}"> @endif
-                        <img src="{{ asset('uploads/avisos/'.$aviso->archivo) }}" class="img-responsive">
-                        @if($aviso->url) </a> @endif
-                </div>
-            @endforeach
-
         </div>
     </div>
 </div>
@@ -109,8 +108,9 @@
             return (Math.random() * (max - min) + min).toFixed(2);
         }
         $('.relate ').each(function(){
-        $(this).attr('data-rateit-value',randomNum(0,5));
+            $(this).attr('data-rateit-value',randomNum(0,5));
         });
-    </script>
+        
+    </script> 
 
 @endsection

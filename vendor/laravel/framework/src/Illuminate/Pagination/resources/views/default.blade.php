@@ -4,7 +4,7 @@
         @if ($paginator->onFirstPage())
             <a class="disabled btn btn-default"><span class="fa fa-chevron-left"></span></a>
         @else
-            <a  class="btn btn-default" href="{{ $paginator->previousPageUrl() }}" rel="prev"><i class="fa fa-chevron-left"></i></a>
+            <a  class="btn btn-default prev" href="{{ $paginator->previousPageUrl() }}" rel="prev"><i class="fa fa-chevron-left"></i></a>
         @endif
 
         {{-- Pagination Elements --}}
@@ -28,7 +28,7 @@
 
         {{-- Next Page Link --}}
         @if ($paginator->hasMorePages())
-            <a  class="btn btn-default" href="{{ $paginator->nextPageUrl() }}" rel="next"><i class="fa fa-chevron-right"></i></a>
+            <a  class="btn btn-default next" href="{{ $paginator->nextPageUrl() }}" rel="next"><i class="fa fa-chevron-right"></i></a>
         @else
             <a class="btn btn-default disabled"><span  class="fa fa-chevron-right"></span></a>
         @endif

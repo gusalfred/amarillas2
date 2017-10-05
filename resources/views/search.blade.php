@@ -32,7 +32,7 @@
                        </div>
                        <div class="panel-body list-group">
                            @foreach ($empresas as $row)
-                               <a class="list-group-item" href="{{ URL::to('empresa/'.$row->id_empresa_direccion.'/'.$row->nombre ) }}">{{ $row->nombre }}</a>
+                               <a class="list-group-item" href="{{ URL::to('empresa/'.$row->id_empresa ) }}">{{ $row->nombre }}</a>
                            @endforeach
                            @if ( count($empresas) > 9)
                                <a class="list-group-item active" href=""><i class="fa fa-plus"></i> Ver Mas Resultados por Nombre </a>
