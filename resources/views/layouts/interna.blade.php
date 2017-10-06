@@ -110,7 +110,7 @@
                 breakpoint: 1024,
                 settings: {
                   slidesToShow: 3,
-                  slidesToScroll: 3,
+                  slidesToScroll: 1,
                   dots: true
                 }
               },
@@ -118,7 +118,7 @@
                 breakpoint: 600,
                 settings: {
                   slidesToShow: 2,
-                  slidesToScroll: 2,
+                  slidesToScroll: 1,
                   arrows: true
                 }
               },
@@ -127,6 +127,7 @@
                 settings: {
                   slidesToShow: 1,
                   slidesToScroll: 1,
+                  dots:true,
                   arrows: false
                 }
               }

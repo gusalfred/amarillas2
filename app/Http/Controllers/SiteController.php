@@ -11,9 +11,12 @@ class SiteController extends Controller
 {
     public function index()
     {
-        $categorias = DB::select("SELECT * FROM categorias_nivel1 ORDER BY RAND() LIMIT 6");
+        $categorias = DB::table('categorias_nivel1')
+        ->inRandomOrder()
+        ->limit(6)
+        ->get();
 
-        $main = DB::select("SELECT * FROM categorias_nivel1 ORDER BY categoria");
+        $main = DB::table('categorias_nivel1')->orderBy('categoria')->paginate(40);
 
         return view('home', compact('categorias', 'main') );
     }
@@ -32,19 +35,19 @@ class SiteController extends Controller
     }
     public function search()
     {
-        $q = $_GET['q'];
+        $termino = $_GET['q'];
 
-        $categorias = DB::table('categorias_nivel2')->where('categoria', 'like', '%'.$q.'%')->paginate(10);
+        $categorias = DB::table('categorias_nivel2')->where('categoria', 'like', '%'.$termino.'%')->paginate(10);
 
         //$empresas = DB::table('empresas')->where('nombre', 'like', '%'.$q.'%')->paginate(10);
 
-        $empresas = DB::table('empresas_direcciones')
-            ->join('empresas', 'empresas_direcciones.id_empresa', '=', 'empresas.id_empresa')
-            ->where('empresas.nombre', 'like', '%'.$q.'%')->paginate(10);
+        $empresas = DB::table('empresas')
+            ->join('empresas_direcciones', 'empresas.id_empresa', '=', 'empresas_direcciones.id_empresa')
+            ->where('nombre', 'like', '%'.$termino.'%')->paginate(10);
 
-        $descripcion = DB::table('empresas')->where('descripcion', 'like', '%'.$q.'%')->paginate(10);
+        $descripcion = DB::table('empresas')->where('descripcion', 'like', '%'.$termino.'%')->paginate(10);
 
-        return view('search', ['categorias' => $categorias, 'empresas' => $empresas, 'descripcion' => $descripcion,'termino'=> $q]);
+        return view('search', compact('categorias', 'empresas', 'descripcion' ,'termino'));
     }
 
     public function categoria($slug)
@@ -116,8 +119,7 @@ class SiteController extends Controller
         $direcciones = DB::table('empresas_direcciones')->where('id_empresa', $id_empresa)->get();
 
         $imagen = DB::table('empresas_media')->where([
-            ['id_empresa', $id_empresa],
-            ['nombre', 'principal']
+            ['id_empresa', $id_empresa]
             ])->first();
 
         $imagenes = DB::table('empresas_media')->where('id_empresa', $id_empresa)->get();
@@ -126,12 +128,20 @@ class SiteController extends Controller
         $redes = DB::table('empresas_redes')
             ->join('redes_sociales', 'empresas_redes.id_red_social', '=', 'redes_sociales.id_red_social')
             ->where('id_empresa', $id_empresa)->get();
-
+        
+        $valor=DB::table('empresas_valoraciones')
+            ->join('users', 'users.id', '=', 'empresas_valoraciones.id_usuario')
+            ->where('id_empresa', $id_empresa)
+            ->avg('valor');
+            
+            
         $comentarios = DB::table('empresas_valoraciones')
             ->join('users', 'users.id', '=', 'empresas_valoraciones.id_usuario')
-            ->where('id_empresa', $id_empresa)->get();
+            ->where('id_empresa', $id_empresa)
+            ->orderBy('creado_fecha','desc')
+            ->paginate(6);
 
-        return view('empresa', compact('empresa','cat2','direcciones', 'imagenes', 'imagen', 'redes', 'comentarios') );
+        return view('empresa', compact('empresa','cat2','direcciones', 'imagenes', 'imagen', 'redes', 'comentarios','valor') );
     }
 
     public function registro_empresa()
@@ -151,6 +161,7 @@ class SiteController extends Controller
             'id_empresa' => $id_empresa,
             'id_usuario' => $id_usuario,
             'comentario' => $comentario,
+            'creado_fecha' => DB::raw('now()'),
             'valor' => $valor
         ];
 

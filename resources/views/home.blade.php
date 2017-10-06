@@ -11,7 +11,6 @@
         <h5 class="col-md-12 hidden-md hidden-lg" style="margin-top:0px"> O héchale un vistazo a cualquiera de estas categorías <i class="fa fa-level-down"></i></h5>
     </div>
         <div class="row">
-            <?php $row = 1; ?>
             @foreach ($categorias as $categoria)
             <div class="col-sm-6 col-md-4 portfolio-item">
                 <div class="jumbotron" style="padding:0px">
@@ -30,9 +29,7 @@
                     </div>
                 </div>
             </div>
-            <?php $row++; ?>
             @endforeach
-
         </div>
     </div>
 </section>
@@ -62,14 +59,15 @@
 
 <div class="container" style="margin-top: 20px; margin-bottom: 20px;">
     <div class="row">
-    <div class="col-sm-12">
-        <h5 style="margin-top:0px" ><i class="fa fa-list"></i> Todas las categorias</h5>
-    </div>
+        <div class="col-sm-12">
+            <h5 style="margin-top:0px" ><i class="fa fa-list"></i> Todas las categorias</h5>
+        </div>
         @foreach ($main as $row)
         <div class="col-sm-12 col-md-3 cat-list" style="margin: 5px 0;">
             <a href="{{ url('/categoria/'.$row->slug) }}"> {{ $row->categoria }}</a>
         </div>
         @endforeach
+        <h5 class="col-sm-12 text-center"><a class="" href="{{url('/categorias')}}"><i class="fa fa-plus"></i>Ver mas</a></h5>
     </div>
 </div>
 

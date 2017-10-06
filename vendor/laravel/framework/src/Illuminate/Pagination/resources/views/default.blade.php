@@ -1,5 +1,5 @@
 @if ($paginator->hasPages())
-    <div class="btn-group btn-group-justified">
+    <div class="btn-group paginator btn-group-justified">
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
             <a class="disabled btn btn-default"><span class="fa fa-chevron-left"></span></a>

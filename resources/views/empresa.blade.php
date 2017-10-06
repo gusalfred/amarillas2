@@ -14,7 +14,7 @@
              <div class="col-md-12 col-sm-12" style="margin-bottom: 20px;">
                 <h3 style="margin-bottom: 0;">{{ $empresa->nombre }}</h3>
                 <p>{{ $empresa->direccion }}</p>
-                <div class="rateit" data-rateit-value="{{ $empresa->estrellas }}" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+                <div class="rateit" data-rateit-value="{{ $valor }}" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
              </div>
         </div>
      </div>
@@ -151,7 +151,7 @@
                 <div class="col-md-12">
                     <h4>Redes Sociales</h4>
                     @foreach($redes as $red)
-                        <a href="{{ $red->url }}" target="_blank"><p><i class="{{ $red->icon_class }} fa-2x" style="color: {{ $red->color }};"></i></p></a>
+                        <a href="{{ $red->url }}" target="_blank" style="display:inline"><i class="{{ $red->icon_class }} fa-3x" style="color: {{ $red->color }};"></i></a>
                     @endforeach
                 </div>
                 <div class="col-md-12">
@@ -205,12 +205,13 @@
                                 <img class="media-object img-circle" src="{{ url('uploads/foto.png') }}" width="60">
                         </div>
                         <div class="media-body">
-                            <h5 class="media-heading">{{ $comentario->name }}</h5>
-                            <p>{{ $comentario->comentario }}</p>
+                            <h5 class="media-heading">{{ $comentario->name }} <small style="color:#aab2bd">{{ date('d-m-Y h:mA', strtotime($comentario->creado_fecha)) }}</small></h5>
+                            <p  style="color:#gray">{{ $comentario->comentario }}</p>
                             <div class="rateit" data-rateit-value="{{ $comentario->valor }}" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
                         </div>
                     </li>
                 @endforeach
+                {{$comentarios->links()}}
             </ul>
         </div>
     </div>
@@ -231,11 +232,4 @@
         </div>
     </div>
 </div>
-<aside id="sticky-social" class="hidden-xs">
-    <ul>
-        <li><a href="#" class="entypo-facebook" target="_blank"><i class="fa fa-facebook-square fa-2x"></i> <span>Facebook</span></a></li>
-        <li><a href="#" class="entypo-twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i> <span>Twitter</span></a></li>
-        <li><a href="#" class="entypo-instagrem" target="_blank"><i class="fa fa-instagram fa-2x"></i> <span>Instagram</span></a></li>
-    </ul>
-</aside>
 @endsection

@@ -12,9 +12,11 @@
         </ol>
     </div>
     <div class="row" style="margin-top: 15px">
-        <div class="col-sm-12">
-        <a class="btn btn-default" href="{{ url('/categorias') }}">Todas las categorias</a>
-            <div class="btn-group btn-group-justified">
+        <div class="col-sm-1 text-center" style="margin-bottom:10px">
+        <a class="btn btn-default" href="{{ url('/categorias') }}" >Todas</a>
+        </div>
+        <div class="col-sm-11 text-center" id="paginatorContainer" >
+            <div class="btn-group btn-group-justified letterPaginator" id="boton">
                 @foreach(range('A','Z') as $letter)
                     @if($letter == $letra)
                         <a class="btn btn-primary" href="{{ url('/categorias/?letter='.$letter) }}">{{$letter}}</a>
@@ -51,5 +53,14 @@
         @endif
     </div>
 </div>
-
+<script>
+         /* $('.btn-group a').slice(2,-2).hide();
+        $('.btn-primary').show();
+        $('.btn-primary').prev().show();
+        $('.btn-primary').next().show();
+      
+        $('.btn-group a ').last().prev().addClass('prev');
+        $('.btn-group a ').first().next().addClass('prev');
+        $('.btn-group a ').not('.prev , .next, .disabled, .btn-primary').hide();*/
+</script>
 @endsection
