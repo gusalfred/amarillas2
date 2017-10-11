@@ -18,20 +18,13 @@
             </ol>
     <!--categorias-->
         <div class="col-md-8">
-        @if($empresas->total() <= 0 )
-            <h2 class="text-center"> Sin resultados <i class="fa fa-meh-o"></i></h2>
-        @else
+            @if($empresas->total() <= 0 )
+                <h2 class="text-center"> Sin resultados <i class="fa fa-meh-o"></i></h2>
+            @else
             @foreach ($empresas as $empresa)
-                
-                    @if( count($avisos) > 0 )
-                        <h5 style="font-size: 11px; color: #CCC; text-align: center;margin:0px">Publicidad </h5>
-                        <a href="{{ URL::to('empresa/'.$aviso->id_empresa.'/'.$empresa->slug) }}" >
-                            <img src="{{ url('uploads/avisos/'.$aviso->archivo) }}" class="img-responsive center-block" alt="" style="margin-bottom:15px">
-                        </a>                    
-                    @endif
                     <div class="panel panel-default col-md-12">
                         <div class="panel-body ">
-                        <!--titulo y estrellas--->
+                        <!--titulo y estrellas-->
                             <div class="row">
                                 <div class="col-md-10 col-sm-12">
                                     <h3 style="margin-top:0px" class="hidden-sm hidden-xs">
@@ -42,7 +35,7 @@
                                     </h4>
                                 </div>
                                 <div class="col-md-2 center-text">
-                                    <div class="rateit" data-rateit-value="{{ $empresa->estrellas }}" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+                                    <div class="rateit" data-rateit-value="{{ App\Modelos\empresas\Empresa::find($empresa->id_empresa)->comentario->avg('valor') }}" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
                                 </div>
                             </div>
                                 <!--info telf y address-->
@@ -57,7 +50,7 @@
                                 <!--comentarios y social-->
                             <div class="row">
                                 <div class="col-xs-8 col-md-10"><span class="box-comments">
-                                    <i class="fa fa-comment-o" style="font-size: 14px;"></i> {{ $empresa->comentarios }} comentarios</span>
+                                    <i class="fa fa-comment-o" style="font-size: 14px;"></i> {{ App\Modelos\empresas\Empresa::find($empresa->id_empresa)->comentario->count() }} comentarios</span>
                                 </div>
                                 <div class="col-xs-4 col-md-2">
                                     <share-button></share-button>

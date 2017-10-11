@@ -108,7 +108,7 @@
             <div class="col-sm-12 col-md-12 center-block">
               <div class="row">
                 <div class="col-sm-12">
-                  <h3 class="search-title" >
+                  <h3 class="search-title" style="z-index: 1000">
                   <p>
                     Encuentra eso que necesitas
                   </p>
@@ -173,6 +173,7 @@ function Maps() {
     //mi ubicación
 if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
+             $('.banner-home').css({'background-image': 'url({{asset('images/load.png')}})','animation':'flash 1.5s infinite','background-position':'top'});
             var pos = {
               lat: position.coords.latitude,
               lng: position.coords.longitude
@@ -185,7 +186,6 @@ if (navigator.geolocation) {
                     searchPlace(pos,city);  //funcion para obtener la foto
                 }
               });
-            map.setCenter(pos);
           }, function() {
             handleLocationError(true);
           });
@@ -219,11 +219,12 @@ if (navigator.geolocation) {
         var request2={
             placeId: id
         };
-        service.getDetails(request2, callback2);
+         setTimeout(service.getDetails(request2, callback2),1000);
       }
+     
       function callback2(result, status) {
                 if (status === google.maps.places.PlacesServiceStatus.OK) {
-                    $('.banner-home').css({'background-image': 'url("'+result.photos[0].getUrl({'maxWidth': 2000, 'maxHeight': 2000})+'")','background-size':'cover'});
+                    $('.banner-home').css({'background-image': 'url("'+result.photos[0].getUrl({'maxWidth': 2000, 'maxHeight': 2000})+'")','background-size':'cover','background-position':'top','animation':'fadeIn 0.5s'});
                 }
       }
 };

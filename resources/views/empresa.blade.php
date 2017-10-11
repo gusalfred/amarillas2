@@ -39,6 +39,14 @@
                      <p class="text-justify well">
                      {!! isset($empresa->descripcion) ? $empresa->descripcion:'<i class="fa fa-file-text-o text-danger"></i> Sin descripción' !!}
                      </p>
+                     <p>
+                        <i class="fa fa-tags"></i> Tags 
+                        @foreach($cat2 as $cat2s)
+                            @foreach(explode(',',$cat2s->categoria) as $tag)
+                                 <span class="badge badge-default" style="font-weight: 100">{{$tag}}</span> 
+                            @endforeach
+                        @endforeach
+                    </p>
                     <div class="panel panel-default">
                         <div class="panel-body row">
                             <div class="col-md-6 col-xs-12" style="margin-top: 10px">
@@ -145,29 +153,43 @@
                     @endif
                     </div>
                 </div>
-                <div class="col-md-12" style="font-size: 14px;">
+                <!--<div class="col-md-12" style="font-size: 14px;">
                      <h4 style="vertical-align:middle"><i class=" glyphicon glyphicon-print"></i> Imprimir direcciones</h4>
+                </div>-->
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <h4 class="panel-heading" style="margin: 0px"><i class="fa fa-twitter"></i> Redes Sociales</h4>
+                        <div class="panel-body text-center" style="background: white">
+                            @if(count($redes)>0)
+                            @foreach($redes as $red)
+                                <a href="{{ $red->url }}" target="_blank" style="display:inline;margin-left: 10px;margin-right: 10px"><i class="{{ $red->icon_class }} fa-3x" style="color: {{ $red->color }};"></i></a>
+                            @endforeach
+                            @else
+                                <h4><span class="fa-stack ">
+                                     <i class="fa fa-ban fa-stack-2x text-danger"></i>
+                                     <i class="fa fa-facebook fa-stack-1x" style="color: black"></i>
+                                    </span> Sin redes</h4>
+                            @endif
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-12">
-                    <h4>Redes Sociales</h4>
-                    @foreach($redes as $red)
-                        <a href="{{ $red->url }}" target="_blank" style="display:inline"><i class="{{ $red->icon_class }} fa-3x" style="color: {{ $red->color }};"></i></a>
-                    @endforeach
-                </div>
-                <div class="col-md-12">
-                    <h4>Subcategorias en donde se puede encontrar</h4>
-                        
-                        <ul>
-                        @foreach($cat2 as $cat2s)
-                           <li>{{$cat2s->categoria}}</li>
-                        @endforeach
-                        </ul>                   
+                    <div class="panel panel-default" >
+                        <h5 class="panel-heading" style="margin: 0;background: #f8d300;color: #00184b;">
+                            <i class="fa fa-sitemap"></i> Subcategorias donde se puede encontrar
+                        </h4>
+                        <ul class="panel-body list-goup" style="padding: 0px">
+                            @foreach($cat2 as $cat2s)
+                                 <a class="list-group-item" href="{{url('/subcategoria/'.$cat2s->slug)}}" >{{$cat2s->categoria}}</a>
+                            @endforeach
+                        </ul>
+                    </div>               
                 </div>
             </div>
         </div>
         <!--comments-->
         <div class="col-md-8 col-xs-12">
-            <h4><i class="fa fa-comment-o"></i> {{ count($comentarios)  }} Comentarios</h4>
+            <h4><i class="fa fa-comment-o"></i> {{ App\Modelos\empresas\Empresa::find($id)->comentario->count()  }} Comentarios</h4>
           <hr>
             @if ( Auth::guest() )
                 Debes <a class="btn-link" href="{{ url('/login') }}"> iniciar sesión</a> para poder comentar

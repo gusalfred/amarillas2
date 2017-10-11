@@ -20,16 +20,16 @@ class SiteController extends Controller
 
         return view('home', compact('categorias', 'main') );
     }
-    public function allCategories()
+    public function allCategories(Request $req)
     {
         $letra='';
-        if(isset($_GET['letter'])){
-            $letra=$_GET['letter'];
+        if($req->has('letter')){
+            $letra=$req->letter;
             $categorias = DB::table('categorias_nivel1')->where('categoria','like',$letra.'%')->get();
         }else{
             $categorias =  DB::table('categorias_nivel1')->get();           
         }
-        //dd($letra);
+
         return view('categorias',compact('categorias','letra'));
         
     }
@@ -39,10 +39,9 @@ class SiteController extends Controller
 
         $categorias = DB::table('categorias_nivel2')->where('categoria', 'like', '%'.$termino.'%')->paginate(10);
 
-        //$empresas = DB::table('empresas')->where('nombre', 'like', '%'.$q.'%')->paginate(10);
-
         $empresas = DB::table('empresas')
             ->join('empresas_direcciones', 'empresas.id_empresa', '=', 'empresas_direcciones.id_empresa')
+            ->orderBy('nombre','asc')
             ->where('nombre', 'like', '%'.$termino.'%')->paginate(10);
 
         $descripcion = DB::table('empresas')->where('descripcion', 'like', '%'.$termino.'%')->paginate(10);
@@ -79,17 +78,15 @@ class SiteController extends Controller
             ->where('id_categoria_nivel2', $cat2->id_categoria_nivel2)
             ->paginate(10);
         
-        //->select('empresas_categorias.id_empresa',DB::raw(' Count(empresas_valoraciones.id_empresa_valoracion) AS totalcomment'))
-        //dd($empresas);
 
-        $relacionados = DB::table('empresas_direcciones')
-            ->join('empresas', 'empresas_direcciones.id_empresa', '=', 'empresas.id_empresa')
-            ->join('empresas_categorias', 'empresas_direcciones.id_empresa', '=', 'empresas_categorias.id_empresa')
-            ->join('categorias_nivel2', 'empresas_categorias.id_categoria_nivel2', '=', 'categorias_nivel2.id_categoria_nivel2')
-            ->where('id_categoria_nivel1', $cat1->id_categoria_nivel1)
+        $relacionados = DB::table('empresas')
+            ->join('empresas_categorias', 'empresas_categorias.id_empresa_categoria', '=', 'empresas.id_empresa')
+            ->join('categorias_nivel2', 'categorias_nivel2.id_categoria_nivel2', '=', 'empresas.id_empresa')
+            ->where('categorias_nivel2.id_categoria_nivel1', $cat1->id_categoria_nivel1)
+            ->inRandomOrder()
             ->limit(4)
             ->get();
-        
+
         $avisos = DB::table('avisos')
                 ->join('avisos_categorias', 'avisos.id_aviso', '=', 'avisos_categorias.id_aviso')
                 ->join('empresas', 'avisos.id_empresa', '=', 'empresas.id_empresa')
@@ -99,7 +96,7 @@ class SiteController extends Controller
                 ->get();
         
         
-        return view('subcategoria', compact('cat1', 'cat2', 'empresas','relacionados', 'avisos','comentarios'));
+        return view('subcategoria', compact('cat1', 'cat2', 'empresas','relacionados', 'avisos'));
             
     }
 
@@ -141,7 +138,7 @@ class SiteController extends Controller
             ->orderBy('creado_fecha','desc')
             ->paginate(6);
 
-        return view('empresa', compact('empresa','cat2','direcciones', 'imagenes', 'imagen', 'redes', 'comentarios','valor') );
+        return view('empresa', compact('empresa','cat2','direcciones', 'imagenes', 'imagen', 'redes', 'comentarios','valor', 'id') );
     }
 
     public function registro_empresa()
