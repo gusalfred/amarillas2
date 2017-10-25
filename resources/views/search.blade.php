@@ -11,9 +11,9 @@
             </ol>
                 <div class="col-md-8 col-sm-12">
                 @if(count($categorias) <= 0 && count($empresas) <= 0 && count($descripcion)<= 0)
-                    <p class="variable-title"><i class="fa fa-search"></i> Sin resultados para "<span class="bg-info" style="border-radius: 8px">{{$termino}}</span>" </p>
+                    <p class="variable-title"><i class="fa fa-search"></i> Sin resultados para <span class="label label-danger">{{$termino}}</span> </p>
                 @else
-                    <p class="variable-title"><i class="fa fa-search"></i> Resultados de la búsqueda para "<span class="bg-success" style="border-radius: 8px"> {{$termino}} </span>" </p>
+                    <p class="variable-title"><i class="fa fa-search"></i> Resultados de la búsqueda para <span class="label label-info"> {{$termino}} </span> </p>
                 @endif                    
                     <div class="panel panel-search panel-default">
                         <div class="panel-heading"><h5>Por Categorías</h5></div>

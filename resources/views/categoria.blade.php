@@ -15,7 +15,7 @@
         <h3 >{{ $cat1->categoria }} </h3>
     </div>
     <div class="row" style="margin-top: 15px">
-        <div class="col-md-8 com-sm-12">
+        <div class="col-md-8 com-sm-12" style="padding-left: 0px;padding-right: 0px">
          <div class="panel panel-search panel-default">
             <div class="panel-heading"><h5>Categorias incluidas<br><small style="color:white">Total: {{ $cat2->total() }}</small></span></h5></div>
                 <div class="panel-body list-group">

@@ -2,9 +2,9 @@
     <div class="btn-group paginator btn-group-justified">
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
-            <a class="disabled btn btn-default"><span class="fa fa-chevron-left"></span></a>
+            <a class="disabled prev btn btn-default"><span class="fa fa-angle-left fa-lg"></span></a>
         @else
-            <a  class="btn btn-default prev" href="{{ $paginator->previousPageUrl() }}" rel="prev"><i class="fa fa-chevron-left"></i></a>
+            <a  class="btn btn-default prev" href="{{ $paginator->previousPageUrl() }}" rel="prev"><i class="fa fa-angle-left fa-lg"></i></a>
         @endif
 
         {{-- Pagination Elements --}}
@@ -28,9 +28,9 @@
 
         {{-- Next Page Link --}}
         @if ($paginator->hasMorePages())
-            <a  class="btn btn-default next" href="{{ $paginator->nextPageUrl() }}" rel="next"><i class="fa fa-chevron-right"></i></a>
+            <a  class="btn btn-default next" href="{{ $paginator->nextPageUrl() }}" rel="next"><i class="fa fa-angle-right fa-lg"></i></a>
         @else
-            <a class="btn btn-default disabled"><span  class="fa fa-chevron-right"></span></a>
+            <a class="btn btn-default next disabled"><span  class="fa fa-angle-right fa-lg"></span></a>
         @endif
     </div>
 @endif

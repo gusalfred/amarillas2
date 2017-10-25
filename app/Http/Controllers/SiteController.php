@@ -16,7 +16,7 @@ class SiteController extends Controller
         ->limit(6)
         ->get();
 
-        $main = DB::table('categorias_nivel1')->orderBy('categoria')->paginate(40);
+        $main = DB::table('categorias_nivel1')->orderBy('categoria')->paginate(32);
 
         return view('home', compact('categorias', 'main') );
     }

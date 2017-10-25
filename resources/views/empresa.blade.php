@@ -36,17 +36,9 @@
                 @endif
                 </div> 
                 <div class="col-md-12">
-                     <p class="text-justify well">
+                     <p class="text-justify" style="margin-top: 10px">
                      {!! isset($empresa->descripcion) ? $empresa->descripcion:'<i class="fa fa-file-text-o text-danger"></i> Sin descripción' !!}
                      </p>
-                     <p>
-                        <i class="fa fa-tags"></i> Tags 
-                        @foreach($cat2 as $cat2s)
-                            @foreach(explode(',',$cat2s->categoria) as $tag)
-                                 <span class="badge badge-default" style="font-weight: 100">{{$tag}}</span> 
-                            @endforeach
-                        @endforeach
-                    </p>
                     <div class="panel panel-default">
                         <div class="panel-body row">
                             <div class="col-md-6 col-xs-12" style="margin-top: 10px">
@@ -67,7 +59,7 @@
                                         <ul id="telfPlus" class="dropdown-menu" style="color:white">
                                         <li class="text-center"><i class="fa fa-plus"></i> Mas Telf.</li>
                                         <li class="divider"></li>
-                                           @foreach ($telefonos as $tel) <li>{{ $tel }}</li> @endforeach 
+                                           @foreach ($telefonos as $tel) <li><a href="tel:{{ $tel }}">{{ $tel }}</a></li> @endforeach 
                                         </ul>
                                     </div>
                                 @endif    
@@ -94,6 +86,14 @@
                 </div>
                 <!--fotos-->
                 <div class="col-md-12">
+                     <p>
+                            <i class="fa fa-tags"></i> Tags 
+                            @foreach($cat2 as $cat2s)
+                                @foreach(explode(',',$cat2s->categoria) as $tag)
+                                     <span class="badge badge-default" style="font-weight: 100">{{$tag}}</span> 
+                                @endforeach
+                            @endforeach
+                        </p>
                     <h4 style="margin:0px"><i class="fa fa-picture-o fa-lg"></i> Fotos</h4>
                         <div class="row">
                             <div class="slider col-md-12 col-xs-12" >
@@ -120,6 +120,19 @@
                 <div class="panel panel-default">
                     <div class="panel-body" style="padding:0px">
                         <div id="map" style="height: 270px;"></div>
+                        <div style="display: none">
+                            <div id="control-div" class="control-div ">
+                                <div id= "control-ui" class="well" style="margin: 3px;cursor: pointer;padding: 0.5px">
+                                    <div id="control-text" class="center-align">
+                                        <a target="_blank" href="https://www.google.com/maps/?q={{$empresa->latitud}},{{ $empresa->longitud }}">
+                                            <p style="margin: 7px;">
+                                                <i class="fa fa-map fa fa-lg blue-text" ></i> ver en Google maps 
+                                            </p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
                         <script type="text/javascript">
                             function initMap() {
                                 var myLatLng = {lat: {{ $empresa->latitud }}, lng: {{ $empresa->longitud }} };
@@ -131,11 +144,21 @@
                                     fullscreenControl: false,
                                     center: myLatLng
                                 });
-                    
+
+                                 var controlDiv= $("#control-div");
+                                 var controlUI = $("#control-ui");
+                                 map.controls[google.maps.ControlPosition.TOP_LEFT].push(controlDiv[0]);
+
+                                 //icono para marcador
+                                var icon={
+                                    url:"{{url('images/marker.png')}}"
+                                };
+
                                 var marker = new google.maps.Marker({
                                     position: myLatLng,
                                     map: map,
-                                    title: '{{ $empresa->nombre }}'
+                                    icon: icon,
+                                    title:'{{ $empresa->nombre }}'
                                 });
                             }
                         </script>
@@ -156,24 +179,22 @@
                 <!--<div class="col-md-12" style="font-size: 14px;">
                      <h4 style="vertical-align:middle"><i class=" glyphicon glyphicon-print"></i> Imprimir direcciones</h4>
                 </div>-->
-                <div class="col-md-12">
+                <div class="col-md-12" style="padding-left: 0px; padding-right: 0px">
                     <div class="panel panel-primary">
                         <h4 class="panel-heading" style="margin: 0px"><i class="fa fa-twitter"></i> Redes Sociales</h4>
                         <div class="panel-body text-center" style="background: white">
                             @if(count($redes)>0)
                             @foreach($redes as $red)
-                                <a href="{{ $red->url }}" target="_blank" style="display:inline;margin-left: 10px;margin-right: 10px"><i class="{{ $red->icon_class }} fa-3x" style="color: {{ $red->color }};"></i></a>
+                                <a href="{{ $red->url }}" target="_blank" style="display:inline;margin-left: 10px;margin-right: 10px">  <i class="{{ $red->icon_class }} fa-3x" style="color: {{ $red->color }};"></i>
+                                </a>
                             @endforeach
                             @else
-                                <h4><span class="fa-stack ">
-                                     <i class="fa fa-ban fa-stack-2x text-danger"></i>
-                                     <i class="fa fa-facebook fa-stack-1x" style="color: black"></i>
-                                    </span> Sin redes</h4>
+                                  <i class=" fa fa-twitter fa-2x fa-flip-vertical "></i> Sin redes.
                             @endif
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12" style="padding-left: 0px; padding-right: 0px">
                     <div class="panel panel-default" >
                         <h5 class="panel-heading" style="margin: 0;background: #f8d300;color: #00184b;">
                             <i class="fa fa-sitemap"></i> Subcategorias donde se puede encontrar

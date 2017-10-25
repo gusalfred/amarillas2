@@ -44,7 +44,19 @@
                                     <p><i class="fa fa-map-marker"></i> {{ isset($empresa->direccion) ?  $empresa->direccion: 'Sin descripción'}}</p>
                                 </div>
                                  <div class="col-md-12">
-                                    <p><i class="fa fa-phone"></i> {{ isset($empresa->telefonos) ? $empresa->telefonos:'S/N'}}</p>
+                                    <p>
+                                        <i class="fa fa-phone"></i>
+                                        <?php $telefonos = explode(",", $empresa->telefonos) ?>    
+                                            @if(count($telefonos) == 1)
+                                                    @if( $telefonos[0] == '')
+                                                        s/n
+                                                    @else
+                                                        <a href="tel:{{$telefonos[0]}}" class="text-info">{{$telefonos[0]}}</a>
+                                                    @endif
+                                            @else
+                                                @foreach ($telefonos as $tel)<a href="tel:{{$tel}}" class="text-info">{{$tel}}</a> | @endforeach 
+                                            @endif
+                                    </p>
                                  </div>
                             </div>
                                 <!--comentarios y social-->
@@ -59,11 +71,9 @@
                         </div>
                     </div>
             @endforeach
-            @endif
             <!--paginador-->
-             @if($empresas->total() > 0 )                
             <div class="text-center">
-                {{ $empresas->appends(['q' => 'a'])->links() }}
+                {{ $empresas->links() }}
                 <p class="text-center">Resultados {{ $empresas->firstItem() }}-{{ $empresas->lastItem() }} de  {{ $empresas->total() }}</p>
             </div>
             @endif

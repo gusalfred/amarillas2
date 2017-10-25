@@ -41,6 +41,9 @@ a { color: #464646; }
     border: 1px solid #ffd400;
     color: white;
 }
+.btn-primary{
+    background: #004488 
+}
 .btn-yellow:hover{
     background: #e6bf00 !important;
     border:1px solid #004488 ;
@@ -74,6 +77,9 @@ a { color: #464646; }
     color: #004488;
 }
 .navbar-default .navbar-nav > li > a:hover{
+    background: #e6bf00;
+}
+.navbar-default .navbar-nav > li > a:focus{
     background: #e6bf00;
 }
 .navbar-collapse{
@@ -204,13 +210,6 @@ a { color: #464646; }
 }
 
 
-.link-black, .link-black:hover, .link-black:active {color: #0f0f0f; text-decoration: none;}
-
-.align-left{ text-align: left;}
-.align-right{ text-align: right;}
-.align-center{ text-align: center;}
-
-
 /*header{background-image: url("../images/home_banner_header.png"); background-attachment: fixed;}*/
 footer{background-color: #01184C; color: #fff; padding-top: 30px; padding-bottom: 10px; font-size: 12px;}
 footer a{color: #fff;}
@@ -311,54 +310,7 @@ div.bigstars div.rateit-reset:hover
     background: url("../images/star-white32.png");
 }
 
-.pagination{vertical-align: middle;}
 .breadcrumb{ margin-bottom: 5px; }
-
-/*STICKY SOCIAL*/
-#sticky-social ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-#sticky-social {
-    left: 0;
-    position: fixed;
-    top: 200px;
-}
-#sticky-social a {
-    background: #333;
-    color: #fff;
-    display: block;
-    height: 50px;
-    font: 16px "Open Sans", sans-serif;
-    line-height: 60px;
-    position: relative;
-    text-align: center;
-    width: 50px;
-}
-#sticky-social a span {
-    line-height: 50px;
-    left: -120px;
-    position: absolute;
-    text-align:center;
-    width:120px;
-}
-#sticky-social a:hover span {
-    left: 100%;
-}
-#sticky-social a[class*="facebook"],
-#sticky-social a[class*="facebook"]:hover,
-#sticky-social a[class*="facebook"] span { background: #3b5998; }
-
-#sticky-social a[class*="twitter"],
-#sticky-social a[class*="twitter"]:hover,
-#sticky-social a[class*="twitter"] span { background: #00aced; }
-
-#sticky-social a[class*="instagrem"],
-#sticky-social a[class*="instagrem"]:hover,
-#sticky-social a[class*="instagrem"] span { background: #517fa4; }
-
 
 
 #portfolio .portfolio-item .portfolio-link {

@@ -11,6 +11,7 @@ function showHide(){
     if(WinWidth<=750){
        $('#menu-collapsible form').removeClass('search-md');
        $('#menu-collapsible .input-group').addClass('input-group-lg');
+       paginaResponsive();                                           //funcion paginador responsive 
     }else{
         //$('#menu-search').attr('style','display:none !important');
         $('#menu-collapsible form').addClass('search-md');
@@ -23,7 +24,7 @@ function allHeight(){
     var tamano= $('.fullheight').attr('height');    //captura el alto del elemento especificado por este atributo
     if(WinWidth<=750){                              //si la anhura de la pantalla es menor adapta la altura al tamaño especificado
       $('.fullheight').outerHeight(tamano);
-      paginaResponsive();                                           //funcion paginador responsive     
+          
     }else{                                              //si no captura la altura de la ventana y de las 2 partes q conforman el footer para darle el tamaño al conenido
        var WinHeight=$(window).height();
         var foot1H= $('#footer-box').outerHeight(true);
@@ -54,12 +55,8 @@ $(document).ready(function(){
 //funcion 
 function paginaResponsive(){
     var items=$('.paginator a').size();
-    if(items>8){
-        $('.btn-primary').prev().addClass('prev');
-        $('.btn-primary').next().addClass('next');
-        $('.paginator a ').last().prev().addClass('prev');
-        $('.paginator a ').first().next().addClass('prev');
-        $('.paginator a ').not('.prev , .next, .disabled, .btn-primary').hide();
+    if(items>4){
+        $('.paginator a ').not('.prev , .next,.first, .last, .btn-primary').hide();
     }
     $('#paginatorContainer').css('overflow-x','scroll');               //|
     $('#paginatorContainer > .letterPaginator').css('display','flex').removeClass('btn-group-justified'); //|
