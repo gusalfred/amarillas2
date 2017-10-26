@@ -48,7 +48,7 @@
                                         @if( $telefonos[0] == '')
                                             s/n
                                         @else
-                                            {{ $telefonos[0] }}
+                                           <a  class="btn-link" href="tel:{{ $telefonos[0] }}"> {{ $telefonos[0] }}</a>
                                         @endif
                                 @else
                                     <div class="dropdown" style="display:inline">
